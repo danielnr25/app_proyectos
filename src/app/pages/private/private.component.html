@@ -4,7 +4,9 @@
   [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a href="">Tipos de Proyecto</a>
+      <a class="mat-link" mat-list-item routerLink="/tipos-de-proyecto" routerLinkActive="router-link-active">Tipos de Proyecto</a>
+      <a class="mat-link" mat-list-item routerLink="/perfiles" routerLinkActive="router-link-active">Perfiles</a>
+      <a class="mat-link" mat-list-item routerLink="/usuarios" routerLinkActive="router-link-active">Usuarios</a>
     </mat-nav-list>
   </mat-sidenav>
 
