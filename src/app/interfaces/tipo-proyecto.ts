@@ -1,5 +1,5 @@
 export interface TipoProyecto{
-  idTipoProyecto: number;
+  idtipoProyecto: number;
   nombre: string;
   estado:string;
 }

@@ -14,9 +14,9 @@ export class TipoProyectoComponent {
   listTypeProject= signal<TipoProyecto[]>([]);
   _servicioTipoProyecto = inject(TipoProyectoService);
 
-  fnEliminartipoProyecto(item:TipoProyecto){
-    console.log(item);
-  }
+  // fnEliminartipoProyecto(item:idtipoProyecto){
+  //   console.log(item);
+  // }
 
   ngOnInit(){
     this._servicioTipoProyecto.getTipoProyectos().subscribe({

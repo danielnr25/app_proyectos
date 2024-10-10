@@ -1,1 +1,25 @@
-<p>MI LISTADO DE TIPOS DE PROYECTOS</p>
+<table mat-table [style]="EstiloTabla" [dataSource]="listaTipoProyectos" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="idtipoProyecto">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.idtipoProyecto}} </td>
+  </ng-container>
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+  </ng-container>
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
+    <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+  </ng-container>
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let item">
+      <button mat-button (click)="buttonClicked(item)">Editar</button>
+      <app-boton #miboton></app-boton>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
