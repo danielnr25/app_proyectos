@@ -3,16 +3,18 @@ import { inject, Injectable } from '@angular/core';
 import { Login } from '@interfaces/login';
 import { RespuestaApi } from '@interfaces/respuesta-api';
 import { Observable } from 'rxjs';
-
+import { environment } from '@env/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  http =  inject(HttpClient);
-  constructor() { }
+  urlApi:string = environment.api
+  constructor(private http : HttpClient) { 
+
+  }
 
   autenticar(data:Login):Observable<Login>{
-    return this.http.post<Login>('https://localhost:7118/api/Sesion/autenticar',data);
+    return this.http.post<Login>(`${this.urlApi}/Sesion/autenticar`,data);
   }
 
   autenticado():Observable<RespuestaApi>{
@@ -23,7 +25,7 @@ export class LoginService {
             Authorization: `Bearer ${token}`,  
         }
     }
-    return this.http.post<RespuestaApi>('https://localhost:7118/api/Sesion/autenticado',null, options);
+    return this.http.post<RespuestaApi>(`${this.urlApi}/Sesion/autenticado`,null, options);
   }
 
   estadoAutenticado(){
