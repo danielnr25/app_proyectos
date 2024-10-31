@@ -1,14 +1,22 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from 'src/app/pages/login/login.component';
+import { AdminComponent } from './admin/admin.component';
 //import { HomeComponent } from '@components/home/home.component';
 
 
 export const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: HomeComponent
-  // }
   {
     path: '',
-    loadChildren: () => import('./pages/private/private.routes').then(m => m.privateRoute)
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component:LoginComponent
+  },
+  {
+    path: 'admin',
+    //component:AdminComponent,
+    loadChildren: () => import('./admin/admin.routes').then(m => m.routes)
   }
 ];

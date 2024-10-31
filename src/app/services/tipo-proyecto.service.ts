@@ -11,6 +11,13 @@ export class TipoProyectoService {
   constructor() { }
 
   getTipoProyectos():Observable<TipoProyecto[]>{
-    return this.http.get<TipoProyecto[]>('https://localhost:7118/api/TipoProyecto');
+    const token = localStorage.getItem('token');
+    const options = {
+        headers:{
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${token}`,  
+        }
+    }
+    return this.http.get<TipoProyecto[]>('https://localhost:7118/api/TipoProyecto',options);
   }
 }

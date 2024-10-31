@@ -24,6 +24,8 @@
     "@popperjs/core": "^2.11.8",
     "app-proyectos": "file:",
     "bootstrap": "^5.3.3",
+    "devextreme": "^24.1.6",
+    "devextreme-angular": "^24.1.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
