@@ -9,6 +9,6 @@ export interface Tarea {
     idmiembro:number,
     area:string, // referencia al nombre del area
     etapa:string, // referencia al nombre de la etapa
-    miembro:string // referencia al nombre del miembro
-    estado:string, // referencia al nombre del estado
+    miembro:string, // referencia al nombre del miembro
+    estado:string // referencia al nombre del estado
 }
