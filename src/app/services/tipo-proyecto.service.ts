@@ -12,7 +12,7 @@ export class TipoProyectoService {
   urlApi:string = environment.api
   constructor(private http:HttpClient) { }
 
-  getTipoProyectos():Observable<TipoProyecto[]>{
+getTipoProyectos():Observable<TipoProyecto[]>{
     const token = localStorage.getItem('token');
     const options = {
         headers:{
@@ -22,7 +22,7 @@ export class TipoProyectoService {
     }
     return this.http.get<TipoProyecto[]>(`${this.urlApi}/TipoProyecto`,options);
     //return this.http.get<TipoProyecto[]>('https://localhost:7118/api/TipoProyecto',options);
-  }
+}
 
 agregarTipoProyecto(dato:TipoProyecto){
     const token = localStorage.getItem('token');
