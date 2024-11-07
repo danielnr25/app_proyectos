@@ -60,5 +60,4 @@ eliminarTipoProyecto(dato:TipoProyecto){
    return this.http.delete<TipoProyecto[]>(`${this.urlApi}/TipoProyecto/${dato.idtipoProyecto}`,options);
 }
 
-
 }
