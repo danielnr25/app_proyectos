@@ -7,6 +7,7 @@ import {Area} from '@interfaces/area'
 @Injectable({
   providedIn: 'root'
 })
+
 export class AreaService {
 
     urlApi:string = environment.api

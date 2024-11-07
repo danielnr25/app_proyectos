@@ -1,64 +1,68 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { DxDataGridComponent, DxDataGridModule, DxFormModule, DxPopupModule, DxProgressBarModule } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
 import notify from 'devextreme/ui/notify';
-import { TipoProyecto } from '@interfaces/tipo-proyecto';
-import {TipoProyectoService} from '@services/tipo-proyecto.service';
+import { Area } from '@interfaces/area';
+import { AreaService } from '@services/area.service';
 
-const IMPORTS_DEVEXTREME = [ DxDataGridModule,DxFormModule,DxPopupModule,DxProgressBarModule];
+const MODULES_DEVEXTREME = [DxDataGridModule,DxFormModule,DxPopupModule,DxProgressBarModule];
 
 @Component({
-  selector: 'app-tipo-proyecto',
+  selector: 'app-area',
   standalone: true,
-  imports: [IMPORTS_DEVEXTREME],
-  templateUrl: './tipo-proyecto.component.html',
-  styleUrl: './tipo-proyecto.component.css'
+  imports: [MODULES_DEVEXTREME],
+  templateUrl: './area.component.html',
+  styleUrl: './area.component.css'
 })
-export class TipoProyectoComponent {
+
+export class AreaComponent {
     @ViewChild(DxDataGridComponent, { static: true }) dataGrid?: DxDataGridComponent;
+    @Input() idproyecto:number=0;
     customersData: any;
     shippersData: any;
     dataSource;
     url: string='';
     masterDetailDataSource: any;
-    
+
     opcionesNuevo:any={
         icon: 'add',
-        text: 'Agregar Tipo de Proyecto',
+        text: 'Agregar Area',
         onClick: () => {
-          this.elementoTipoProyecto = {
-            idtipoProyecto:0,
+          this.elementoArea = {
+            idarea:0,
             nombre:'',
             comentario:'',
-            estado:''
+            estado:'',
+            idproyecto:0
           }
-          console.log("Nuevo tipo proyecto");
+          console.log("Nueva area");
           this.popupVisible = true;
         },
     };
-      
+
     opcionesEliminar:any={
         icon: 'remove',
-        text: 'Eliminar Tipo de Proyecto',
+        text: 'Eliminar Area',
         onClick: () => {
-            console.log("Eliminar tipo proyecto");
-            this.eliminarSeleccionados();
+          console.log("Eliminar area");
+          this.eliminarSeleccionados();
         },
     };
-    
+
     editorOptions = { placeholder: 'Search column' };
     popupVisible:boolean=false;
 
-    elementoTipoProyecto:TipoProyecto={
-        idtipoProyecto:0,
+    elementoArea:Area ={
+        idarea:0,
         nombre:'',
         comentario:'',
-        estado:''
-    };
+        estado :'',
+        idproyecto:0
+    }
 
     botonGuardarOpciones={
         width: 300,
-        text: 'Guardar Tipo Proyecto',
+        text: 'Guardar Area',
         type: 'default',
         stylingMode: 'contained',
         onClick: () => {
@@ -66,54 +70,51 @@ export class TipoProyectoComponent {
           this.fnGuardar();
         },
     }
-    
+
     showProgressBar:boolean=false;
     progressValue:number=0;
-
     readonly allowedPageSizes:any = [5,10, 30, 100, 'all'];
     showPageSizeSelector = true;
     showInfo = true;
     showNavButtons = true;
-  
-    constructor(private servicioTipos:TipoProyectoService){
+
+    constructor(private servicioArea:AreaService){
         this.fnEditar = this.fnEditar.bind(this);
         this.dataSource = new DataSource({
-          key: 'idtipoProyecto',
-          load: (loadOptions) => {
-    
-            return new Promise((resolve, reject) => {
-    
-              this.servicioTipos.getTipoProyectos().subscribe({
-                next: data => {
-                  console.log(data);
-                  let result = {
-                    data: data,
-                    totalCount: data.length
-                  };
-                  resolve(result);
-                },
-                error: err => {
-                  reject(err);
-                }
-              });
-            });
-          }
-        });
+            key:'idarea',
+            load: (loadOptions) =>{
+                return new Promise((resolve, reject) => {
+                    this.servicioArea.getListArea(this.idproyecto).subscribe({
+                        next: data => {
+                          console.log(data);
+                          let result = {
+                            data: data,
+                            totalCount: data.length
+                          };
+                          resolve(result);
+                        },
+                        error: err => {
+                          reject(err);
+                        }
+                    });
+                })
+            }
+        })
     }
 
     fnEditar(e:any){
-        this.elementoTipoProyecto = e.row.data;
+        this.elementoArea = e.row.data;
         this.popupVisible = true;
         console.log('fila',e, this.popupVisible);
     }
-    
-      obtenerAlto(){
+
+    obtenerAlto(){
         return window.innerHeight;
-      }
+    }
     
-      fnGuardar(){
-        if(this.elementoTipoProyecto.idtipoProyecto > 0 ){
-          this.servicioTipos.actualizarTipoProyecto(this.elementoTipoProyecto).subscribe({
+    fnGuardar(){
+        if(this.elementoArea.idarea > 0 ){
+          this.servicioArea.actualizarArea(this.elementoArea).subscribe({
             next: data => {
               console.log(data);
               notify({
@@ -127,20 +128,16 @@ export class TipoProyectoComponent {
                   hide: { type: 'fade', duration: 40, to: 0 },
                 },
               });
-    
               this.refresh();
-    
             },
             error: err => {
               console.log(err)
             }
           });
         }else{
-    
-          this.servicioTipos.agregarTipoProyecto(this.elementoTipoProyecto).subscribe({
+          this.servicioArea.agregarArea(this.elementoArea).subscribe({
             next: data => {
               console.log(data);
-    
               notify({
                 message: 'Se guardo de manera correcta',
                 type:'success',
@@ -152,24 +149,19 @@ export class TipoProyectoComponent {
                   hide: { type: 'fade', duration: 40, to: 0 },
                 },
               });
-    
               this.refresh();
-    
             },
             error: err => {
               console.log(err)
             }
           });
         }
-    
         this.refresh();
-      }
-    
-      eliminarSeleccionados() {
+    }
+
+    eliminarSeleccionados() {
         const seleccionados :any = this.dataGrid?.instance.getSelectedRowsData();
-    
         console.log(seleccionados);
-    
         if (seleccionados.length === 0) {
           notify({
             message: 'Debe seleccionar un registro a eliminar',
@@ -191,18 +183,15 @@ export class TipoProyectoComponent {
         let itemsEliminados = 0;
     
         seleccionados.forEach((item:any, index:any) => {
-    
           console.log('datos item',item);
-    
+
           let datosEliminar:any={
-            idtipoProyecto:item.idtipoProyecto
+            idarea:item.idarea
           };
     
-          this.servicioTipos.eliminarTipoProyecto(datosEliminar).subscribe({
+          this.servicioArea.eliminarArea(datosEliminar).subscribe({
             next: data => {
-    
               console.log('data',data);
-    
               itemsEliminados++;
               this.progressValue = (itemsEliminados / totalItems) * 100;
     
@@ -214,18 +203,15 @@ export class TipoProyectoComponent {
                 notify("Se elimino correctamente", 'success', 2000);
                 this.refresh();
               }
-    
             },
             error: errores => {
               console.log(errores);
             }
           });
         });
-      }
+    }
 
-      refresh(){
+    refresh(){
         this.dataGrid?.instance.refresh();
-      }
-
-
+    }
 }
