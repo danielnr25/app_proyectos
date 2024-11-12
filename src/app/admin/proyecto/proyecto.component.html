@@ -176,6 +176,23 @@ displayMode="full"  [showPageSizeSelector]="showPageSizeSelector"
     <app-area [idproyecto]="elementoProyecto.idproyecto" ></app-area>
 }
 
+@if(mostrarEtapa){
+    <app-etapa [idproyecto]="elementoProyecto.idproyecto" ></app-etapa>
+  }
+  
+  @if(mostrarMiembro){
+    <app-miembro [idproyecto]="elementoProyecto.idproyecto" ></app-miembro>
+  }
+
+
+  @if(mostrarEstado){
+    <app-estado [idproyecto]="elementoProyecto.idproyecto" ></app-estado>
+  }
+
+  @if(mostrarKanba){
+    <panel-canva [idproyecto]="elementoProyecto.idproyecto"  ></panel-canva>
+  }
+
 </dx-scroll-view>
 
 </dx-popup>

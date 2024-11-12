@@ -72,6 +72,4 @@ export class ProyectoService {
         return this.http.get<Proyecto>(`${this.urlApi}/Proyecto/Combos/${idproyecto}`,options);
     }
 
-
-
 }
