@@ -47,7 +47,7 @@ export class EstadoService {
         return this.http.put<Estado[]>(`${this.urlApi}/Estado/${dato.idestado}`,dato,options);
     }
 
-    eliminarArea(dato:Estado){
+    eliminarEstado(dato:Estado){
         const token = localStorage.getItem('token');
         const options = {
             headers:{

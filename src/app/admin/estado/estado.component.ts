@@ -94,7 +94,7 @@ export class EstadoComponent {
       load: (loadOptions) => {
         return new Promise((resolve, reject) => {
 
-          this.servicioEstado.getlistEstado(this.idproyecto).subscribe({
+          this.servicioEstado.getListEstado(this.idproyecto).subscribe({
             next: data => {
               console.log(data);
               let result = {

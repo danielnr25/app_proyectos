@@ -144,7 +144,7 @@ export class AdminTareaListaComponent implements OnInit {
 
   refresh = () => {
     console.log('refresh');
-    this.servicioTarea.obtenerListaTarea(this.idproyecto).subscribe({
+    this.servicioTarea.getlistTarea(this.idproyecto).subscribe({
       next: data => {
         console.log('tereas',data);
         this.taskCollections = data;

@@ -1,8 +1,8 @@
 export interface Estado {
     idestado: number,
-    mombre:string,
+    nombre:string,
     comentario:string,
-    estado:string,
+    estado1:string,
     idproyecto:number,
     maximo_tareas:number
 }

@@ -1,13 +1,27 @@
-import { ApplicationConfig,LOCALE_ID } from '@angular/core';
+import { ApplicationConfig,isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
-import { registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es';
 import { provideHttpClient } from '@angular/common/http';
-registerLocaleData(localeEs, 'es');
+import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimationsAsync(), {provide: LOCALE_ID, useValue: 'es'}, provideHttpClient()]
+    providers: [provideRouter(routes), provideAnimationsAsync(), provideHttpClient(),
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    }), provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    }), provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    }), provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    }), provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    })]
 };
+  

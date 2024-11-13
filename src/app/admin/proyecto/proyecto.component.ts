@@ -9,12 +9,18 @@ import { TipoProyectoService } from '@services/tipo-proyecto.service';
 import { AreaComponent } from '../area/area.component';
 
 import { Tarea } from '@interfaces/tarea';
+import { MiembroComponent } from '../miembro/miembro.component';
+import { EstadoComponent } from '../estado/estado.component';
+import { EtapaComponent } from '../etapa/etapa.component';
+import { UserAvatarComponent } from '@shared/user-avatar/user-avatar.component';
+import { TareaKanbanComponent } from '@shared/tarea-kanban/tarea-kanban.component';
+import { AdminTareaListaComponent } from '@shared/admin-tarea-lista/admin-tarea-lista.component';
 
 const MODULES_EXTREME = [DxDataGridModule,DxFormModule,DxPopupModule,DxProgressBarModule,DxScrollViewModule,DxTabsModule,DxButtonModule,DxToolbarModule,DxRadioGroupModule];
 @Component({
   selector: 'app-proyecto',
   standalone: true,
-  imports: [MODULES_EXTREME,AreaComponent],
+  imports: [MODULES_EXTREME,AreaComponent,MiembroComponent,EstadoComponent,EtapaComponent,UserAvatarComponent,TareaKanbanComponent,AdminTareaListaComponent],
   templateUrl: './proyecto.component.html',
   styleUrl: './proyecto.component.css'
 })
