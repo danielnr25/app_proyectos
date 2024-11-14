@@ -57,6 +57,7 @@ export class AreaComponent {
         nombre:'',
         comentario:'',
         estado :'',
+        
         idproyecto:0
     }
 
