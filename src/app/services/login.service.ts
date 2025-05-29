@@ -14,7 +14,7 @@ export class LoginService {
   }
 
   autenticar(data:Login):Observable<Login>{
-    return this.http.post<Login>(`${this.urlApi}/Sesion/autenticar`,data);
+    return this.http.post<Login>(`${this.urlApi}/autenticar`,data);
   }
 
   autenticado():Observable<RespuestaApi>{
