@@ -25,7 +25,7 @@ export class LoginService {
             Authorization: `Bearer ${token}`,  
         }
     }
-    return this.http.post<RespuestaApi>(`${this.urlApi}/Sesion/autenticado`,null, options);
+    return this.http.post<RespuestaApi>(`${this.urlApi}/autenticado`,null, options);
   }
 
   estadoAutenticado(){
