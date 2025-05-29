@@ -1,6 +1,6 @@
 export interface Login {
   idusuario?: number,
-  Usuario1:string,
+  Usuario:string,
   Clave:string,
   token?:string
 }
