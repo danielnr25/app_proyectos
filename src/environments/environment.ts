@@ -1,3 +1,3 @@
 export const environment = {
-    api:"https://www.apiproyectosangular.somee.com/api"
+    api:"https://projectapp-production-9c16.up.railway.app/api"
 };
