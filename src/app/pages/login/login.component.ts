@@ -40,7 +40,7 @@ export class LoginComponent {
     this.mostrarLoading = true;
  
     const request:Login={
-      Usuario1:this.formularioLogin.value.usuario,
+      Usuario:this.formularioLogin.value.usuario,
       Clave:this.formularioLogin.value.clave
     }
 
